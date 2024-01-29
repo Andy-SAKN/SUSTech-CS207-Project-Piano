@@ -1,5 +1,5 @@
 # SUSTech-CS207-Project-Piano（2023fall Digital Logic）
-### bonus视频介绍上传到b站了，约13分钟
+## bonus视频介绍上传到b站了，约13分钟
 【链接跳转】https://www.bilibili.com/video/BV1u4421A7pW/?vd_source=2347c699c40e3a971470bde33b0f40de
 
 
