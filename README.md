@@ -3,7 +3,7 @@
 【链接跳转】(https://www.bilibili.com/video/BV1u4421A7pW/?vd_source=2347c699c40e3a971470bde33b0f40de)
 
 ## 介绍
-这是南方科技大学大二上的数字逻辑课程的一个写好的项目（在分数显示上有bug，开学拿到开发板后修改），代码利用fpga开发板实现了一个可以自由弹奏、自动播放歌曲并且有学习模式——超低配版的音游和切换按键模式——根据用户喜好选择不同音符对应不同开关的电子钢琴。项目由两人合作完成，得分104/100。使用verilog语言，vivado 2017.4编程，利用VScode辅助编程。由于vivado无法自动补充语法和标亮begin end，加上VScode里有很多好用的插件——例如Copilot支持自动补充无脑代码，建议编程时可以多用用VScode。项目的代码目前还未经过框架化和优化，因此包含较多单纯重复的屎山成分，后期会抽时间修改QAQ。
+这是南方科技大学大二上的数字逻辑课程的一个写好的项目（在分数显示上有bug，开学拿到开发板后修改），代码利用fpga开发板实现了一个可以自由弹奏、自动播放歌曲并且有学习模式——超低配版的音游和切换按键模式——根据用户喜好选择不同音符对应不同开关的电子钢琴。项目由二人合作完成，得分104(满分100）。使用verilog语言，vivado 2017.4编程，利用VScode辅助编程。由于vivado无法自动补充语法和标亮begin end，加上VScode里有很多好用的插件——例如Copilot支持自动补充无脑代码，建议编程时可以多用用VScode。项目的代码目前还未经过框架化和优化，因此包含较多单纯重复的屎山成分，后期会抽时间修改QAQ。
 ## 如何让代码在板子上跑起来
 首先，你要有一块开发板。自己买会很贵（两三千块左右），可以直接找学校老师借，大部分计算机系应该都配有类似的开发板。我们使用的是XILINX的型号为xc7a35tcsg324-1的开发板，如图。
 
@@ -143,6 +143,59 @@ DFF, "Q" and "nQ" represent standard output signals, while "D" serves as the inp
 
 ## Buzzer
 Based on the input "mode," a specific music selection is made. The transcoded output is then directed to "speaker" as the speaker signal.
+
+### System structure description
+
+[![QQ-20240130000656.png](https://i.postimg.cc/bJgxjb7J/QQ-20240130000656.png)](https://postimg.cc/6272r75J)
+### Implementation Instructions for Bonus
+
+#### 1. Button Switching
+For button switching, a 24-bit wide "reg anJian" is utilized to store positions corresponding to do, re, mi, and silence. The position of the keyboard switch, starting from the left, determines the respective three-bit wide storage location by storing the corresponding decimal number minus one. During decoding, a right shift of the corresponding number by 10000000 (128) is performed.
+
+#### 2. Different Note Lengths
+To specify the beat for each note in a song, the system records the number of clock transitions during note playback. When the count exceeds the designated beat, a brief silence is introduced, and the system transitions to the next note.
+
+#### 3. Real-Time Updating of User Scores
+For real-time user score updates, the system records the time difference between the lifting and lowering of keys. This difference is then compared with the standard time difference. Smaller time differences result in higher scoring levels.
+
+### Project Summary
+
+#### 1. Spike Issue
+Addressing spike issues is crucial, especially concerning nanosecond brief uncertainties during the learning mode. Correct sampling is essential to avoid potential damage.
+
+#### 2. Complete Conditional Branches
+Ensure that "if-else" and "case default" branches are fully written, and the variables on the right side of equations in sensitive lists are not omitted to prevent latch generation errors.
+
+#### 3. Multi-Driver Caution
+Beware of multi-driver issues and give due attention to yellow warnings in the design, as these can indicate potential problems.
+
+#### 4. Consistency in Reset Handling
+Be cautious of inconsistent handling of resets (rising edge vs. falling edge) between team members to avoid conflicts and ensure proper synchronization.
+
+#### 5. Time Budget for On-Board Testing
+Allocate sufficient time for on-board testing, as unexpected bugs often emerge during this phase.
+
+#### 6. Compile Stage Issues in Simulation
+In simulation, syntax errors or binding errors may cause the process to be stuck in the compilation stage without explicit error reporting. Be vigilant in addressing these issues.
+
+#### 7. Importance of Debouncing
+Debouncing is crucial, especially in switch implementations, to mitigate noise and ensure reliable input processing.
+
+#### 8. Distinguish Between Blocking and Non-Blocking Assignments
+Clearly differentiate between blocking and non-blocking assignments from the beginning to avoid potential logic errors that may arise due to a one-cycle delay during temporary changes.
+
+### Citation
+
+- Link: [SUSTech_CS207_Final-Project_2020f](https://github.com/GhostFrankWu/SUSTech_CS207_Final-Project_2020f)
+
+Drawing inspiration from the melody encoding framework in shelf design, the song encoding scheme utilizes a five-bit binary string to represent musical notes, retrieved based on their respective indices.
+
+- Link: [SUSTech-CS207-2021Summer-StudyPac](https://github.com/Two-Cats-Software-Organization/SUSTech-CS207-2021Summer-StudyPac)
+
+Drawing inspiration from the way 7_seg is controled.
+
+
+
 
 
 
