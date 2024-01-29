@@ -1,6 +1,42 @@
 # SUSTech-CS207-Project-Piano（2023fall Digital Logic）
 ### bonus视频介绍和代码讲解上传到b站了，约13分钟
 【链接跳转】(https://www.bilibili.com/video/BV1u4421A7pW/?vd_source=2347c699c40e3a971470bde33b0f40de)
+## 目录
+
+1. [介绍](#介绍)
+   - [bonus视频介绍和代码讲解上传到b站了，约13分钟](#bonus视频介绍和代码讲解上传到b站了，约13分钟)
+   - [如何让代码在板子上跑起来](#如何让代码在板子上跑起来)
+   - [成功烧写代码后如何使用电子琴](#成功烧写代码后如何使用电子琴)
+   - [项目报告](#项目报告)
+      - [Team Roles and Schedule](#team-roles-and-schedule)
+         - [Contribution Ratio: 1:1](#contribution-ratio-11)
+         - [Planned Schedule:](#planned-schedule)
+      - [Progress Update:](#progress-update)
+      - [System Function List](#system-function-list)
+      - [Top module introduction](#top-module-introduction)
+         - [Input](#input)
+         - [Output](#output)
+      - [Introduction to Single Module Functionalities](#introduction-to-single-module-functionalities)
+   - [Lightseg Module](#lightseg-module)
+   - [XiaoDou2](#xiaodou2)
+   - [Counter/Divider](#counterdivider)
+   - [DFF](#dff)
+   - [Buzzer](#buzzer)
+      - [System structure description](#system-structure-description)
+   - [Implementation Instructions for Bonus](#implementation-instructions-for-bonus)
+      - [1. Button Switching](#1-button-switching)
+      - [2. Different Note Lengths](#2-different-note-lengths)
+      - [3. Real-Time Updating of User Scores](#3-real-time-updating-of-user-scores)
+   - [Project Summary](#project-summary)
+      - [1. Spike Issue](#1-spike-issue)
+      - [2. Complete Conditional Branches](#2-complete-conditional-branches)
+      - [3. Multi-Driver Caution](#3-multi-driver-caution)
+      - [4. Consistency in Reset Handling](#4-consistency-in-reset-handling)
+      - [5. Time Budget for On-Board Testing](#5-time-budget-for-on-board-testing)
+      - [6. Compile Stage Issues in Simulation](#6-compile-stage-issues-in-simulation)
+      - [7. Importance of Debouncing](#7-importance-of-debouncing)
+      - [8. Distinguish Between Blocking and Non-Blocking Assignments](#8-distinguish-between-blocking-and-non-blocking-assignments)
+   - [Citation](#citation)
 
 ## 介绍
 这是南方科技大学大二上的数字逻辑课程的一个写好的项目（在分数显示上有bug，开学拿到开发板后修改），代码利用fpga开发板实现了一个可以自由弹奏、自动播放歌曲并且有学习模式——超低配版的音游和切换按键模式——根据用户喜好选择不同音符对应不同开关的电子钢琴。项目由二人合作完成，得分104(满分100）。使用verilog语言，vivado 2017.4编程，利用VScode辅助编程。由于vivado无法自动补充语法和标亮begin end，加上VScode里有很多好用的插件——例如Copilot支持自动补充无脑代码，建议编程时可以多用用VScode。项目的代码目前还未经过框架化和优化，因此包含较多单纯重复的屎山成分，后期会抽时间修改QAQ。
